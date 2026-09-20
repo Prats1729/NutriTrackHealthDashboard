@@ -1,0 +1,22 @@
+{
+  "name": "nutritrack-health-dashboard",
+  "version": "1.0.0",
+  "description": "Production Health Analytics & Nutrition Planner MERN Application",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build:client": "npm run build --prefix client",
+    "start:server": "npm start --prefix server"
+  },
+  "keywords": [
+    "nutrition",
+    "health-analytics",
+    "mern",
+    "firebase-auth",
+    "gemini-ai"
+  ],
+  "author": "",
+  "license": "ISC"
+}

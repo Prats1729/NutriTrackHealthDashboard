@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriTrack - Health Profile &amp; Clinical Parameters</title>
+<!-- Material Symbols Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Play CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration with Design System Tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#eff4ff",
+            "tertiary-fixed-dim": "#ffb77d",
+            "tertiary": "#703a00",
+            "inverse-surface": "#213145",
+            "secondary": "#006c4a",
+            "on-secondary-fixed-variant": "#005137",
+            "on-surface": "#0b1c30",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#ffdcc3",
+            "surface-container": "#e5eeff",
+            "on-background": "#0b1c30",
+            "background": "#f8f9ff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-container": "#ffd2b1",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c7c4d8",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#0f0069",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#68dba9",
+            "on-surface-variant": "#464555",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "tertiary-container": "#934e00",
+            "outline": "#777587",
+            "on-primary-container": "#dad7ff",
+            "secondary-container": "#82f5c1",
+            "on-tertiary-fixed": "#2f1500",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#85f8c4",
+            "primary-fixed": "#e2dfff",
+            "on-secondary-fixed": "#002114",
+            "surface-tint": "#4d44e3",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#c3c0ff",
+            "inverse-primary": "#c3c0ff",
+            "primary": "#3525cd",
+            "surface-container-high": "#dce9ff",
+            "primary-container": "#4f46e5",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#00714e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Geist", "sans-serif"],
+            "body-md": ["Geist", "sans-serif"],
+            "label-md": ["Geist", "sans-serif"],
+            "display-lg": ["Geist", "sans-serif"],
+            "body-sm": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "headline-sm": ["Geist", "sans-serif"],
+            "code-num": ["Geist", "monospace"],
+            "label-sm": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "title-kpi": ["Geist", "sans-serif"],
+            "display-lg-mobile": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "code-num": ["13px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "title-kpi": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @import url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css');
+    
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f9ff;
+      color: #0b1c30;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar                                              -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-[260px] flex flex-col justify-between border-r border-outline-variant/40 bg-surface-container-lowest z-40 p-4 shadow-sm">
+<!-- Header / Brand -->
+<div>
+<div class="flex items-center gap-3 px-2 py-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">vital_signs</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight leading-none">NutriTrack</span>
+<span class="text-label-sm font-label-sm text-outline mt-1 font-medium">Health Analytics</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav aria-label="Primary Navigation" class="space-y-1.5">
+<!-- Overview -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.98]" href="01-dashboard.html">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-label-md font-label-md">Overview</span>
+</a>
+<!-- Meal Logger -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.98]" href="#meal-logger">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+<span class="text-label-md font-label-md">Meal Logger</span>
+</a>
+<!-- Recipe Studio -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.98]" href="#recipe-studio">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="text-label-md font-label-md">Recipe Studio</span>
+</a>
+<!-- 7-Day Trends -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.98]" href="03-trends.html">
+<span class="material-symbols-outlined text-[20px]">monitoring</span>
+<span class="text-label-md font-label-md">7-Day Trends</span>
+</a>
+<!-- Health Profile (ACTIVE STATE AS MANDATED) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-low text-primary font-semibold border-l-4 border-primary shadow-xs" href="#health-profile">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-label-md font-label-md">Health Profile</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.98]" href="06-settings.html">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+</div>
+<!-- SideNav Footer Info -->
+<div class="pt-4 border-t border-outline-variant/30 space-y-2">
+<div class="px-3 py-2.5 bg-surface-container-low/60 rounded-lg flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-label-md font-label-md font-semibold text-on-surface">14-Day Streak</span>
+</div>
+<span class="text-code-num font-code-num text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full text-xs font-semibold">Active</span>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-error-container/30 hover:text-error transition-colors active:scale-[0.98]" href="#logout">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar                                               -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 w-full pl-[260px] border-b border-outline-variant/40 bg-surface-container-lowest z-30 shadow-sm">
+<div class="h-16 flex items-center justify-between px-8">
+<!-- Search Input on Left -->
+<div class="relative w-80 max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-background border border-outline-variant/40 rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 transition-all" placeholder="Search metrics, foods, biometric logs..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-label-sm font-label-sm text-outline border border-outline-variant/50 rounded px-1.5 py-0.5 bg-surface-container-lowest">⌘K</div>
+</div>
+<!-- Trailing Action Controls & Profile -->
+<div class="flex items-center gap-4">
+<!-- Action Buttons -->
+<button class="h-9 px-3.5 flex items-center gap-1.5 text-body-md font-body-md font-medium text-on-surface bg-surface-container-lowest border border-outline-variant/60 rounded-lg hover:bg-surface-container-low hover:border-outline transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>History</span>
+</button>
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="h-5 w-px bg-outline-variant/40"></div>
+<!-- Primary Action -->
+<button class="h-9 px-4 flex items-center gap-2 bg-primary text-on-primary rounded-lg text-body-md font-body-md font-semibold hover:bg-primary-container transition-all shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Profile Changes</span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-3 pl-2">
+<img alt="Prateek Verma portrait" class="w-9 h-9 rounded-full object-cover border border-outline-variant/50 shadow-xs" data-alt="A clean professional studio portrait photograph of Prateek Verma, an athletic Southeast Asian male health researcher in his early thirties, dressed in an uncluttered navy performance polo against a neutral light gray architectural background. The lighting is crisp, even, and natural with balanced high-key shadows adhering strictly to modern clinical SaaS portraiture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVjrbGFXHwNeCqPuVKea0XtjCQbMw5YMG1aBYvdsXE2T8320cbBgTyIVWGZVhHIK7LVoD3WpMHqU53COTDqNyBdzSNIC8TbajsigWygW8WQfesTe3SSFrG26hsoqGMQ9v3Urw1jZjN-EkhwWxFuLhXpxDU6SedIpVvhmVuro6H5fVLx4U7mmG3ALsY8KKY-WRBeOoBsCbk1mFM1fW7d5TpTTBufzZfTutX3IAd863tfrCybayv1Lt_"/>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-label-md font-label-md font-semibold text-on-surface leading-tight">Prateek Verma</span>
+<span class="text-label-sm font-label-sm text-outline">Pro Member</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN CLINICAL CANVAS                                                     -->
+<!-- ========================================================================= -->
+<main class="pl-[260px] min-h-[calc(100vh-64px)] pb-16">
+<div class="max-w-[1400px] mx-auto px-8 py-8 space-y-8">
+<!-- Page Header & Metadata Status Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-outline-variant/30 pb-6">
+<div>
+<div class="flex items-center gap-2.5 mb-1.5">
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Health Profile &amp; Clinical Parameters</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Clinical Sync Active
+            </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">
+            Manage your biometric baseline, caloric targets, dietary protocols, and synced wearables.
+          </p>
+</div>
+<div class="flex items-center gap-3 self-start md:self-auto">
+<span class="text-label-sm font-label-sm text-outline">Last recalculation: Today at 07:15 AM</span>
+<button class="px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-primary rounded-lg text-label-md font-label-md font-semibold transition-colors flex items-center gap-1.5 border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+            Re-evaluate BMR
+          </button>
+</div>
+</div>
+<!-- 2-COLUMN CLINICAL RESPONSIVE GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- ================================================================= -->
+<!-- LEFT COLUMN: Biometrics, Identity & Energy Formula (Span 6)       -->
+<!-- ================================================================= -->
+<div class="lg:col-span-6 space-y-6">
+<!-- User Hero Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm hover:border-outline-variant transition-all">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Prateek Verma portrait" class="w-16 h-16 rounded-full object-cover border-2 border-primary/20 shadow-sm" data-alt="A bright high-resolution close-up portrait of Prateek Verma, smiling calmly with focused clinical eyes, wearing light athletic techwear. High-key soft ambient daylight illuminates his facial features with crisp clarity, set in a clean minimalist laboratory gym environment in modern pristine light mode." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvA3qrQD3yCgvg1j9c8-LwK2lz5H42lPlDbEjS79YIlCnHm5VfjUaOEfRbpt8V1xX7UDmZt5a9xvt9Bx3DT-BOCtkkEuclUvNz1eSKl41CgYSChOyRpB37g0jZQvwURSdD4qJmIBiIo6tAvvY3LpBrLmZg_px74nomfHaO63ml2vg3w_i21IPZ3-US-H6Qe-Cw1DY4uMQvB5IwdZY2zvC8rnbsC4lw_WT9ZjGtoWyneTDsEG--4ezk"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-surface-container-lowest" title="Live Synced"></span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Prateek Verma</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-primary border border-outline-variant/30 text-label-sm font-label-sm font-semibold">Standard Pro</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">31 yrs old • Male • 178 cm (5'10") • 73.8 kg</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-label-sm font-label-sm text-secondary font-medium">Synced with Apple Health</span>
+<span class="text-label-sm font-label-sm text-outline">• 12m ago</span>
+</div>
+</div>
+</div>
+<button class="p-2 text-outline hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors" title="Edit identity details">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<!-- Biometrics Input Grid Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm space-y-6">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Physical Biometrics</h3>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Verified Scale Source</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Height -->
+<div class="p-4 rounded-lg bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-outline">Stature / Height</span>
+<span class="material-symbols-outlined text-outline text-[18px]">height</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-kpi font-title-kpi text-on-surface">178</span>
+<span class="text-body-md font-body-md text-outline">cm</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-code-num">5'10"</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline mt-2">Locked to clinical intake</span>
+</div>
+<!-- Current Weight -->
+<div class="p-4 rounded-lg bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-outline">Current Weight</span>
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">scale</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-kpi font-title-kpi text-on-surface">73.8</span>
+<span class="text-body-md font-body-md text-outline">kg</span>
+</div>
+<span class="inline-flex items-center gap-1 text-label-sm font-label-sm text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                    -0.4 kg this wk
+                  </span>
+</div>
+<span class="text-label-sm font-label-sm text-outline mt-2">Weighed today at 7:15 AM (Withings)</span>
+</div>
+<!-- Goal Weight -->
+<div class="p-4 rounded-lg bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-outline">Goal Target Weight</span>
+<span class="material-symbols-outlined text-primary text-[18px]">flag</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-kpi font-title-kpi text-primary">71.0</span>
+<span class="text-body-md font-body-md text-outline">kg</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-code-num">2.8 kg remaining</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline mt-2">Target Date: Nov 15, 2026</span>
+</div>
+<!-- Body Fat % -->
+<div class="p-4 rounded-lg bg-surface-container-low/40 border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-outline">Body Fat Composition</span>
+<span class="material-symbols-outlined text-outline text-[18px]">query_stats</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-kpi font-title-kpi text-on-surface">14.8</span>
+<span class="text-body-md font-body-md text-outline">%</span>
+</div>
+<span class="text-label-sm font-label-sm text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Athletic Range</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline mt-2">DEXA scan / Smart scale baseline</span>
+</div>
+</div>
+<!-- Activity Level Selection -->
+<div class="space-y-2 pt-2">
+<label class="text-label-md font-label-md text-on-surface flex items-center justify-between">
+<span>Baseline Physical Activity Level</span>
+<span class="text-outline font-normal">PAL Multiplier: 1.55</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 bg-surface-container-lowest border border-outline-variant/50 rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 transition-all appearance-none cursor-pointer">
+<option>Sedentary (desk work, minimal intentional exercise)</option>
+<option>Lightly Active (1-2 low-impact sessions/week)</option>
+<option selected="">Moderately Active (3-5 vigorous workouts / week)</option>
+<option>Very Active (6-7 intense endurance or hypertrophy sessions)</option>
+<option>Extremely Active (Athletic doubles / heavy physical occupation)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline">Reflects structured resistance training plus a baseline of 9,500 daily steps.</p>
+</div>
+</div>
+<!-- Calculated Energy Metrics Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm space-y-6">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">local_fire_department</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Calculated Energy Metrics</h3>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Mifflin-St Jeor Formula</span>
+</div>
+<!-- Metric Pair Tiles -->
+<div class="grid grid-cols-2 gap-4">
+<!-- BMR -->
+<div class="p-4 rounded-xl bg-surface-container-low/30 border border-outline-variant/30">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-sm font-label-sm text-outline">BMR (Basal Rate)</span>
+<span class="material-symbols-outlined text-outline text-[16px]" title="Calories burned completely at rest">info</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-headline-md font-headline-md font-bold text-on-surface">1,760</span>
+<span class="text-body-sm font-body-sm text-outline">kcal / day</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1.5">Vital metabolic baseline</p>
+</div>
+<!-- TDEE -->
+<div class="p-4 rounded-xl bg-surface-container-low/30 border border-outline-variant/30">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-sm font-label-sm text-outline">TDEE (Total Expenditure)</span>
+<span class="material-symbols-outlined text-outline text-[16px]" title="Expenditure factoring active movement">info</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-headline-md font-headline-md font-bold text-on-surface">2,680</span>
+<span class="text-body-sm font-body-sm text-outline">kcal / day</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1.5">Maintenance energy equilibrium</p>
+</div>
+</div>
+<!-- Active Program Highlight Banner -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-primary/20 space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="text-label-md font-label-md font-semibold text-primary">Active Prescription Protocol</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-primary text-label-sm font-label-sm font-semibold border border-primary/20">
+                  -280 kcal Deficit Target
+                </span>
+</div>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface leading-snug">Gradual Fat Loss &amp; Lean Retention</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+                  Controlled moderate caloric restriction calculated to preserve skeletal muscle volume while targeting ~0.35kg fat oxidation weekly.
+                </p>
+</div>
+<div class="pt-2 flex items-center justify-between border-t border-outline-variant/20">
+<span class="text-body-sm font-body-sm text-outline">Target Daily Caloric Budget:</span>
+<div class="flex items-baseline gap-1.5">
+<span class="text-title-kpi font-title-kpi text-primary">2,400</span>
+<span class="text-body-sm font-body-sm text-primary font-medium">kcal/day</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================================================================= -->
+<!-- RIGHT COLUMN: Dietary Strategy & Integrations (Span 6)            -->
+<!-- ================================================================= -->
+<div class="lg:col-span-6 space-y-6">
+<!-- Macro Split Configuration Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm space-y-6">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">pie_chart</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Macronutrient Distribution</h3>
+</div>
+<span class="text-label-sm font-label-sm text-secondary font-semibold">100% Balanced</span>
+</div>
+<!-- Segmented Progress Bar Display -->
+<div class="space-y-2">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-outline">
+<span>Distribution Strategy</span>
+<span>Budget: 2,400 kcal</span>
+</div>
+<div class="h-3 w-full bg-surface-container-low rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-outline-variant/30">
+<div class="bg-[#4F46E5] h-full rounded-l-full transition-all" style="width: 30%;" title="30% Protein"></div>
+<div class="bg-[#059669] h-full transition-all" style="width: 40%;" title="40% Carbohydrates"></div>
+<div class="bg-[#D97706] h-full rounded-r-full transition-all" style="width: 30%;" title="30% Dietary Fats"></div>
+</div>
+<!-- Macro Breakdown Legend & Values -->
+<div class="grid grid-cols-3 gap-3 pt-2">
+<!-- Protein -->
+<div class="p-3 rounded-lg border border-outline-variant/30 bg-surface-container-lowest">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#4F46E5]"></span>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Protein</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="text-headline-sm font-headline-sm text-on-surface">180<span class="text-body-sm font-body-sm text-outline ml-0.5">g</span></span>
+<span class="text-label-sm font-label-sm text-outline">30%</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-code-num mt-1 block">720 kcal</span>
+</div>
+<!-- Carbs -->
+<div class="p-3 rounded-lg border border-outline-variant/30 bg-surface-container-lowest">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#059669]"></span>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Carbs</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="text-headline-sm font-headline-sm text-on-surface">220<span class="text-body-sm font-body-sm text-outline ml-0.5">g</span></span>
+<span class="text-label-sm font-label-sm text-outline">40%</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-code-num mt-1 block">880 kcal</span>
+</div>
+<!-- Fats -->
+<div class="p-3 rounded-lg border border-outline-variant/30 bg-surface-container-lowest">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#D97706]"></span>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Fats</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<span class="text-headline-sm font-headline-sm text-on-surface">65<span class="text-body-sm font-body-sm text-outline ml-0.5">g</span></span>
+<span class="text-label-sm font-label-sm text-outline">30%</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-code-num mt-1 block">585 kcal</span>
+</div>
+</div>
+</div>
+<!-- Custom Macro Lock & Clinical Presets -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface font-semibold">Macro Strategy Presets</span>
+<button class="text-label-sm font-label-sm text-primary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+                  Unlock Gram Overrides
+                </button>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2.5 px-3 rounded-lg border border-primary bg-surface-container-low text-primary text-label-sm font-label-sm font-semibold text-center transition-all">
+                  Athletic Hypertrophy
+                </button>
+<button class="py-2.5 px-3 rounded-lg border border-outline-variant/40 bg-surface-container-lowest text-on-surface-variant hover:border-outline text-label-sm font-label-sm font-medium text-center transition-all">
+                  Endurance Fuel
+                </button>
+<button class="py-2.5 px-3 rounded-lg border border-outline-variant/40 bg-surface-container-lowest text-on-surface-variant hover:border-outline text-label-sm font-label-sm font-medium text-center transition-all">
+                  Low Carb Performance
+                </button>
+</div>
+</div>
+</div>
+<!-- Dietary Restrictions & Allergies Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm space-y-5">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">no_food</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Dietary Restrictions &amp; Intolerances</h3>
+</div>
+<button class="text-label-sm font-label-sm text-primary font-semibold hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Add Allergy
+              </button>
+</div>
+<!-- Tag Chips Grid -->
+<div class="space-y-3">
+<span class="text-label-sm font-label-sm text-outline block">Active Filter Rules in Recipe Studio:</span>
+<div class="flex flex-wrap gap-2">
+<!-- Lactose Sensitivity -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-body-sm font-body-sm font-medium bg-amber-50 text-amber-800 border border-amber-200">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                  Lactose Sensitivity (Mild)
+                  <button class="hover:text-amber-950 ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<!-- Tree Nuts -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-body-sm font-body-sm font-medium bg-red-50 text-red-800 border border-red-200">
+<span class="material-symbols-outlined text-[16px]">block</span>
+                  Tree Nuts (Excluded)
+                  <button class="hover:text-red-950 ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<!-- Shellfish Allowed -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-body-sm font-body-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                  Shellfish (Allowed)
+                  <button class="hover:text-emerald-950 ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+</div>
+<!-- Dietary Protocol Toggles -->
+<div class="pt-2 space-y-3 border-t border-outline-variant/30">
+<div class="flex items-center justify-between py-1">
+<div>
+<span class="text-body-md font-body-md font-medium text-on-surface block">Halal Certification Priority</span>
+<span class="text-body-sm font-body-sm text-outline">Filter meal recommendations for certified ingredients</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-1">
+<div>
+<span class="text-body-md font-body-md font-medium text-on-surface block">Strict Kosher Compliance</span>
+<span class="text-body-sm font-body-sm text-outline">Segregate dairy and meat meal preparation advice</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Connected Health Devices & Apps Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-6 shadow-sm space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">devices</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Connected Health Devices</h3>
+</div>
+<span class="text-label-sm font-label-sm text-outline">3 of 4 Active</span>
+</div>
+<!-- Wearables Integration List -->
+<div class="divide-y divide-outline-variant/20">
+<!-- Apple Health -->
+<div class="py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600">
+<span class="material-symbols-outlined text-[22px]">favorite</span>
+</div>
+<div>
+<span class="text-body-md font-body-md font-semibold text-on-surface block">Apple Health</span>
+<span class="text-body-sm font-body-sm text-outline">Active Energy, Steps &amp; Resting Heart Rate</span>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Connected
+                  </span>
+<span class="text-label-sm font-label-sm text-outline block mt-0.5">Synced 12m ago</span>
+</div>
+</div>
+<!-- Withings Body+ Scale -->
+<div class="py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-[22px]">monitor_weight</span>
+</div>
+<div>
+<span class="text-body-md font-body-md font-semibold text-on-surface block">Withings Body+ Scale</span>
+<span class="text-body-sm font-body-sm text-outline">Auto-updates weight &amp; impedance body fat</span>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Connected
+                  </span>
+<span class="text-label-sm font-label-sm text-outline block mt-0.5">Synced today 7:15 AM</span>
+</div>
+</div>
+<!-- Strava -->
+<div class="py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-orange-50 border border-orange-200 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined text-[22px]">directions_run</span>
+</div>
+<div>
+<span class="text-body-md font-body-md font-semibold text-on-surface block">Strava</span>
+<span class="text-body-sm font-body-sm text-outline">Live exercise burn &amp; GPS cadence sync</span>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1.5 text-label-sm font-label-sm font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Connected
+                  </span>
+<span class="text-label-sm font-label-sm text-outline block mt-0.5">Synced yesterday</span>
+</div>
+</div>
+<!-- Whoop 4.0 / Oura Ring -->
+<div class="py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[22px]">watch</span>
+</div>
+<div>
+<span class="text-body-md font-body-md font-semibold text-on-surface block">Whoop 4.0 / Oura Ring</span>
+<span class="text-body-sm font-body-sm text-outline">Recovery strain &amp; autonomic sleep architecture</span>
+</div>
+</div>
+<div>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/60 hover:border-primary text-primary rounded-lg text-label-md font-label-md font-semibold transition-all shadow-xs active:scale-[0.98]">
+                    + Connect
+                  </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sticky Contextual Action Bar for Convenience -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div>
+<span class="text-label-md font-label-md font-semibold text-on-surface block">All modifications affect recipe calculations in real-time</span>
+<span class="text-label-sm font-label-sm text-outline">Profile changes are safely archived in clinical version history.</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-auto">
+<button class="px-4 py-2 text-body-md font-body-md font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-lg transition-colors">
+            Discard
+          </button>
+<button class="h-10 px-5 flex items-center gap-2 bg-primary text-on-primary rounded-lg text-body-md font-body-md font-semibold hover:bg-primary-container transition-all shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Save Profile Changes</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

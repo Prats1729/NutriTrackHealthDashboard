@@ -1,0 +1,237 @@
+{
+  "name": "projects/8964717628383086438",
+  "title": "NutriTrack Health Dashboard",
+  "visibility": "PRIVATE",
+  "createTime": "2026-09-20T15:40:40.123075Z",
+  "updateTime": "2026-09-20T15:52:49.583256Z",
+  "projectType": "TEXT_TO_UI_PRO",
+  "thumbnailScreenshot": {
+    "name": "projects/8964717628383086438/screens/236d9446cad04cd4b0bd9949c043d73e/fileEntries/screenshot",
+    "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XwENfMzrXxfSPzkhw636-gPnDv6BXDlv3w0S0PhytNAkPR_Xb49EbIVEiaMGfSO2zZIS7XOVAvHy-5WRZIUHZX6FqKxlBvThZRPfqn5kxB-N35Hu6LiOc7eQwT3DPTmi_8gzQhGLiNykr_0gn9VEFo870cf_hbCh-upWFvSegFd8ErnGWd5eJoCKpqdl8KB1a6R6kSNM8IewWGIJLDGGrRMmnVIpq6UAnoA_w41jCGSqsSYdoD05d1-xw"
+  },
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "LIGHT",
+    "font": "GEIST",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#4f46e5",
+    "headlineFont": "GEIST",
+    "bodyFont": "GEIST",
+    "labelFont": "GEIST",
+    "namedColors": {
+      "on_primary_fixed": "#0f0069",
+      "surface_tint": "#4d44e3",
+      "outline_variant": "#c7c4d8",
+      "inverse_on_surface": "#eaf1ff",
+      "on_secondary_fixed": "#002114",
+      "surface_dim": "#cbdbf5",
+      "surface_container_lowest": "#ffffff",
+      "tertiary": "#703a00",
+      "secondary_fixed": "#85f8c4",
+      "on_primary": "#ffffff",
+      "on_background": "#0b1c30",
+      "on_tertiary_container": "#ffd2b1",
+      "on_tertiary_fixed_variant": "#6e3900",
+      "on_secondary_fixed_variant": "#005137",
+      "on_secondary": "#ffffff",
+      "on_surface_variant": "#464555",
+      "background": "#f8f9ff",
+      "surface_container_low": "#eff4ff",
+      "on_secondary_container": "#00714e",
+      "outline": "#777587",
+      "tertiary_container": "#934e00",
+      "on_error": "#ffffff",
+      "primary_fixed": "#e2dfff",
+      "inverse_primary": "#c3c0ff",
+      "secondary_container": "#82f5c1",
+      "primary": "#3525cd",
+      "error_container": "#ffdad6",
+      "surface_container_high": "#dce9ff",
+      "surface_container_highest": "#d3e4fe",
+      "tertiary_fixed_dim": "#ffb77d",
+      "secondary": "#006c4a",
+      "on_primary_container": "#dad7ff",
+      "on_surface": "#0b1c30",
+      "on_tertiary": "#ffffff",
+      "primary_fixed_dim": "#c3c0ff",
+      "on_tertiary_fixed": "#2f1500",
+      "surface_container": "#e5eeff",
+      "inverse_surface": "#213145",
+      "surface_variant": "#d3e4fe",
+      "on_error_container": "#93000a",
+      "surface_bright": "#f8f9ff",
+      "tertiary_fixed": "#ffdcc3",
+      "primary_container": "#4f46e5",
+      "on_primary_fixed_variant": "#3323cc",
+      "error": "#ba1a1a",
+      "surface": "#f8f9ff",
+      "secondary_fixed_dim": "#68dba9"
+    },
+    "designMd": "---\nname: Nutritional Intelligence\ncolors:\n  surface: '#f8f9ff'\n  surface-dim: '#cbdbf5'\n  surface-bright: '#f8f9ff'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#eff4ff'\n  surface-container: '#e5eeff'\n  surface-container-high: '#dce9ff'\n  surface-container-highest: '#d3e4fe'\n  on-surface: '#0b1c30'\n  on-surface-variant: '#464555'\n  inverse-surface: '#213145'\n  inverse-on-surface: '#eaf1ff'\n  outline: '#777587'\n  outline-variant: '#c7c4d8'\n  surface-tint: '#4d44e3'\n  primary: '#3525cd'\n  on-primary: '#ffffff'\n  primary-container: '#4f46e5'\n  on-primary-container: '#dad7ff'\n  inverse-primary: '#c3c0ff'\n  secondary: '#006c4a'\n  on-secondary: '#ffffff'\n  secondary-container: '#82f5c1'\n  on-secondary-container: '#00714e'\n  tertiary: '#703a00'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#934e00'\n  on-tertiary-container: '#ffd2b1'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#e2dfff'\n  primary-fixed-dim: '#c3c0ff'\n  on-primary-fixed: '#0f0069'\n  on-primary-fixed-variant: '#3323cc'\n  secondary-fixed: '#85f8c4'\n  secondary-fixed-dim: '#68dba9'\n  on-secondary-fixed: '#002114'\n  on-secondary-fixed-variant: '#005137'\n  tertiary-fixed: '#ffdcc3'\n  tertiary-fixed-dim: '#ffb77d'\n  on-tertiary-fixed: '#2f1500'\n  on-tertiary-fixed-variant: '#6e3900'\n  background: '#f8f9ff'\n  on-background: '#0b1c30'\n  surface-variant: '#d3e4fe'\ntypography:\n  display-lg:\n    fontFamily: Geist\n    fontSize: 40px\n    fontWeight: '600'\n    lineHeight: 48px\n    letterSpacing: -0.03em\n  display-lg-mobile:\n    fontFamily: Geist\n    fontSize: 32px\n    fontWeight: '600'\n    lineHeight: 40px\n    letterSpacing: -0.025em\n  headline-lg:\n    fontFamily: Geist\n    fontSize: 28px\n    fontWeight: '600'\n    lineHeight: 36px\n    letterSpacing: -0.02em\n  headline-md:\n    fontFamily: Geist\n    fontSize: 22px\n    fontWeight: '600'\n    lineHeight: 28px\n    letterSpacing: -0.015em\n  headline-sm:\n    fontFamily: Geist\n    fontSize: 18px\n    fontWeight: '600'\n    lineHeight: 24px\n    letterSpacing: -0.01em\n  title-kpi:\n    fontFamily: Geist\n    fontSize: 30px\n    fontWeight: '700'\n    lineHeight: 36px\n    letterSpacing: -0.03em\n  body-lg:\n    fontFamily: Geist\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: 24px\n    letterSpacing: -0.005em\n  body-md:\n    fontFamily: Geist\n    fontSize: 14px\n    fontWeight: '400'\n    lineHeight: 20px\n    letterSpacing: 0em\n  body-sm:\n    fontFamily: Geist\n    fontSize: 12px\n    fontWeight: '400'\n    lineHeight: 16px\n    letterSpacing: 0em\n  label-md:\n    fontFamily: Geist\n    fontSize: 13px\n    fontWeight: '500'\n    lineHeight: 16px\n    letterSpacing: 0.01em\n  label-sm:\n    fontFamily: Geist\n    fontSize: 11px\n    fontWeight: '500'\n    lineHeight: 14px\n    letterSpacing: 0.02em\n  code-num:\n    fontFamily: Geist\n    fontSize: 13px\n    fontWeight: '500'\n    lineHeight: 16px\n    letterSpacing: 0em\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  gutter: 1rem\n  gutter-desktop: 1.5rem\n  margin: 1rem\n  margin-desktop: 2rem\n  space-xs: 0.25rem\n  space-sm: 0.5rem\n  space-md: 1rem\n  space-lg: 1.5rem\n  space-xl: 2rem\n---\n\n## Brand & Style\n\nThis design system delivers a clinical, high-precision health analytics experience inspired by modern engineering tools and top-tier clinical interfaces. Built strictly for light mode, it eliminates clutter in favor of high visual contrast, structured modular density, and absolute data clarity. \n\nThe aesthetic is grounded in modern corporate minimalism with an analytical precision edge: crisp white cards, hairline borders, muted functional tints, and systematic data visualization. The emotional response is one of control, clinical reliability, and quiet encouragement\u2014transforming complex metabolic metrics and nutrition logs into actionable, calm insights.\n\n## Colors\n\nThe palette is engineered for cognitive clarity, separating navigation and primary execution from nutritional status metrics:\n\n- **Primary (`#4F46E5` / Deep Indigo):** Dedicated strictly to primary user actions, high-level interactive states, active tab triggers, and key system commands.\n- **Secondary (`#059669` / Muted Emerald):** Anchors success states, macro target completions, positive caloric balance, and affirmative status indicators.\n- **Tertiary (`#D97706` / Warm Amber):** Reserved for nearing thresholds, maintenance warnings, micronutrient anomalies, and cautionary states.\n- **Critical / Negative (`#DC2626` / Crimson):** Applied exclusively to calorie/macro overages, missed critical logs, or bio-metric risk boundaries.\n- **Canvas & Card Structure:** The page background sits on `#F8FAFC` (Slate-50) transitioning to `#F1F5F9` (Slate-100) for structural wells and control panels, while active content cards use `#FFFFFF`.\n- **Text & Neutral Contrast:**\n  - Primary text and metrics: `#0F172A` (Slate-900)\n  - Secondary text and descriptive copy: `#475569` (Slate-600)\n  - Captions, meta tags, and inactive labels: `#94A3B8` (Slate-400)\n  - Structural hairline borders: `#E2E8F0` (Slate-200)\n\n## Typography\n\nTypographic discipline relies entirely on Geist, selected for its technical precision, neutral geometry, and superior tabular rendering of numerics.\n\n- **KPI Numbers & Macro Metrics:** Use `title-kpi` with font-variant-numeric set to `tabular-nums` so numbers align seamlessly across rows and columns.\n- **Hierarchy:** High visual contrast is established via size and weight rather than decorative shifts. Headlines are tightly tracked with negative letter spacing to project modern utility.\n- **Microcopy & Metadata:** Labels and captions use `label-sm` in all-caps or title case with slight positive letter tracking to maximize legibility against subtle badge fills and slate borders.\n\n## Layout & Spacing\n\nThe layout is built around an analytical 12-column grid that shifts gracefully between dashboard density and focused analytical workflows:\n\n- **Canvas & Containers:** Mobile uses fluid full-width blocks with `margin` (16px). Desktop standardizes on a max-width layout of 1440px with a responsive sidebar and a primary canvas framed by `margin-desktop` (32px).\n- **Column Grids:** Desktop layout splits into standard analytical blocks: 4-column metric cards (3-card row), 6-column meal breakdown panels (2-column split), or an 8/4 split for primary analytics versus daily summary streams.\n- **Component Padding Scale:** \n  - Standard card interior: `space-lg` (24px) for desktop, `space-md` (16px) for mobile.\n  - Condensed KPI / Macro summary tiles: `space-md` (16px).\n  - Compact inputs and segmented controls: `space-xs` (4px) to `space-sm` (8px).\n\n## Elevation & Depth\n\nDepth is established through low-contrast physical layers rather than heavy drop shadows:\n\n- **The Baseline Layer:** The page background `#F8FAFC` sits at the floor. Recessed utility panels (e.g., filter wells, metric bars) use `#F1F5F9`.\n- **Card Surfaces:** Active interactive content cards use pure `#FFFFFF`, bounded by a sharp 1px border of `#E2E8F0`. \n- **Shadow Profile:** Elevation is feather-light (`shadow-sm`): `0px 1px 2px 0px rgba(15, 23, 42, 0.05)`. This creates crisp, tactile separation without introducing dark or muddy blurs.\n- **Hover & Active States:** On hover, interactive analytical cards shift their border to `#CBD5E1` and transition their shadow to `0px 4px 6px -1px rgba(15, 23, 42, 0.07), 0px 2px 4px -2px rgba(15, 23, 42, 0.05)`.\n- **Modals & Overlays:** Floating popovers and meal-logging drawers utilize `#FFFFFF` with a crisp border and elevated shadow: `0px 20px 25px -5px rgba(15, 23, 42, 0.08), 0px 8px 10px -6px rgba(15, 23, 42, 0.04)`.\n\n## Shapes\n\nThe design system maintains a balanced geometry (`roundedness: 2`):\n\n- **Cards & Data Panels:** Standard radius of `0.5rem` (8px). Larger parent containers or overview modules step up to `0.75rem` (12px) to frame nested items cleanly.\n- **Buttons & Text Inputs:** `0.5rem` (8px) ensures cohesion with card geometry.\n- **Micro Badges & Tills:** Macro pill badges, status indicator chips, and segmented progress bars use full rounded pills (`9999px`) to visually separate continuous status data from structured card containers.\n\n## Components\n\n### Buttons\n- **Primary:** Background `#4F46E5`, foreground `#FFFFFF`, border none, 8px radius. Hover: `#4338CA`. Active: `#3730A3`.\n- **Secondary / Outline:** Background `#FFFFFF`, foreground `#0F172A`, 1px solid border `#E2E8F0`, 8px radius. Hover: `#F8FAFC` and border `#CBD5E1`.\n- **Ghost:** Background transparent, foreground `#475569`. Hover: `#F1F5F9` and foreground `#0F172A`.\n\n### Status Badges & Pill Tints\nBadges use 10% opacity soft-tinted backgrounds matched with high-contrast text:\n- **Success / Target Hit:** Background `#ECFDF5` (Emerald-50), text `#047857` (Emerald-700), border `1px solid #A7F3D0`.\n- **Warning / Approaching:** Background `#FFFBEB` (Amber-50), text `#B45309` (Amber-700), border `1px solid #FDE68A`.\n- **Alert / Over Limit:** Background `#FEF2F2` (Red-50), text `#B91C1C` (Red-700), border `1px solid #FECACA`.\n- **Neutral / Meta:** Background `#F1F5F9` (Slate-100), text `#475569` (Slate-600), border `1px solid #E2E8F0`.\n\n### KPI & Macro Progress Tiles\n- White surface `#FFFFFF`, 1px border `#E2E8F0`, 16px padding.\n- Displays label in `label-sm` (`#94A3B8`), metric total in `title-kpi` (`#0F172A`), followed by target limit metadata.\n- Integrated mini progress tracks: 6px track height, `#F1F5F9` background, `#059669` fill for protein/carbs/fats up to 100%, transitioning immediately to `#DC2626` upon overshoot.\n\n### Segmented Progress Bars\n- Multi-nutrient distributed bars use an 8px track height with rounded pill ends.\n- Segments divide calories across meals or macros (e.g., Protein `#4F46E5`, Carbs `#059669`, Fats `#D97706`).\n- Include a 2px vertical white separator between contiguous values.\n\n### Form Inputs & Selectors\n- Height 40px, background `#FFFFFF`, border 1px solid `#E2E8F0`, padding 0 12px, font size 14px.\n- Focus state: border-color `#4F46E5`, box-shadow `0 0 0 3px rgba(79, 70, 229, 0.12)`.\n- Placeholder text: `#94A3B8`.\n\n### Lists & Meal Logs\n- Borderless rows separated by `1px solid #F1F5F9` dividers.\n- Hover row background: `#F8FAFC`.\n- Left: Meal title and timestamp (`body-md` bold, subtext in `body-sm` `#94A3B8`).\n- Right: Numerical macro badges aligned with `code-num` formatting.",
+    "colorVariant": "FIDELITY",
+    "overridePrimaryColor": "#4f46e5",
+    "overrideSecondaryColor": "#059669",
+    "overrideTertiaryColor": "#d97706",
+    "overrideNeutralColor": "#64748b",
+    "spacingScale": 2,
+    "typography": {
+      "title-kpi": {
+        "fontFamily": "Geist",
+        "fontSize": "30px",
+        "fontWeight": "700",
+        "lineHeight": "36px",
+        "letterSpacing": "-0.03em"
+      },
+      "body-sm": {
+        "fontFamily": "Geist",
+        "fontSize": "12px",
+        "fontWeight": "400",
+        "lineHeight": "16px",
+        "letterSpacing": "0em"
+      },
+      "display-lg-mobile": {
+        "fontFamily": "Geist",
+        "fontSize": "32px",
+        "fontWeight": "600",
+        "lineHeight": "40px",
+        "letterSpacing": "-0.025em"
+      },
+      "body-lg": {
+        "fontFamily": "Geist",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "letterSpacing": "-0.005em"
+      },
+      "code-num": {
+        "fontFamily": "Geist",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "16px",
+        "letterSpacing": "0em"
+      },
+      "body-md": {
+        "fontFamily": "Geist",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "20px",
+        "letterSpacing": "0em"
+      },
+      "headline-md": {
+        "fontFamily": "Geist",
+        "fontSize": "22px",
+        "fontWeight": "600",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.015em"
+      },
+      "label-sm": {
+        "fontFamily": "Geist",
+        "fontSize": "11px",
+        "fontWeight": "500",
+        "lineHeight": "14px",
+        "letterSpacing": "0.02em"
+      },
+      "display-lg": {
+        "fontFamily": "Geist",
+        "fontSize": "40px",
+        "fontWeight": "600",
+        "lineHeight": "48px",
+        "letterSpacing": "-0.03em"
+      },
+      "label-md": {
+        "fontFamily": "Geist",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "16px",
+        "letterSpacing": "0.01em"
+      },
+      "headline-sm": {
+        "fontFamily": "Geist",
+        "fontSize": "18px",
+        "fontWeight": "600",
+        "lineHeight": "24px",
+        "letterSpacing": "-0.01em"
+      },
+      "headline-lg": {
+        "fontFamily": "Geist",
+        "fontSize": "28px",
+        "fontWeight": "600",
+        "lineHeight": "36px",
+        "letterSpacing": "-0.02em"
+      }
+    },
+    "spacing": {
+      "gutter": "1rem",
+      "space-xl": "2rem",
+      "space-xs": "0.25rem",
+      "space-sm": "0.5rem",
+      "space-lg": "1.5rem",
+      "gutter-desktop": "1.5rem",
+      "margin": "1rem",
+      "margin-desktop": "2rem",
+      "space-md": "1rem"
+    },
+    "headlineFontFamily": "Geist",
+    "bodyFontFamily": "Geist",
+    "labelFontFamily": "Geist"
+  },
+  "screenInstances": [
+    {
+      "id": "236d9446cad04cd4b0bd9949c043d73e",
+      "sourceScreen": "projects/8964717628383086438/screens/236d9446cad04cd4b0bd9949c043d73e",
+      "x": 1024,
+      "width": 1280,
+      "height": 1512
+    },
+    {
+      "id": "33e6e8cd698647239710fc001e0f89b1",
+      "sourceScreen": "projects/8964717628383086438/screens/33e6e8cd698647239710fc001e0f89b1",
+      "x": 5376,
+      "y": 1768,
+      "width": 1280,
+      "height": 1890
+    },
+    {
+      "id": "3e2a8d72988f4ba9b64a7fc754108805",
+      "sourceScreen": "projects/8964717628383086438/screens/3e2a8d72988f4ba9b64a7fc754108805",
+      "x": 1344,
+      "y": 1768,
+      "width": 1280,
+      "height": 1576
+    },
+    {
+      "id": "681cd55b4112480897622ed925a72db6",
+      "sourceScreen": "projects/8964717628383086438/screens/681cd55b4112480897622ed925a72db6",
+      "x": 4032,
+      "y": 1768,
+      "width": 1280,
+      "height": 1438
+    },
+    {
+      "id": "6e1df8f1dca246c7b43861bf3edb5981",
+      "sourceScreen": "projects/8964717628383086438/screens/6e1df8f1dca246c7b43861bf3edb5981",
+      "x": 2688,
+      "y": 1768,
+      "width": 1280,
+      "height": 1615
+    },
+    {
+      "id": "assets_ca81a64894f14de3b69f2f11a359ade6",
+      "width": 960,
+      "height": 540,
+      "sourceAsset": "assets/ca81a64894f14de3b69f2f11a359ade6",
+      "type": "DESIGN_SYSTEM_INSTANCE"
+    },
+    {
+      "id": "ca8e342fdde747fbb0ea02ae52f3d63e",
+      "sourceScreen": "projects/8964717628383086438/screens/ca8e342fdde747fbb0ea02ae52f3d63e",
+      "y": 1768,
+      "width": 1280,
+      "height": 1418
+    }
+  ],
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}

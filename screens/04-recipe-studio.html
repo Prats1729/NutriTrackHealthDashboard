@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NutriTrack - Recipe Studio (AI Assistant)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#eff4ff",
+            "tertiary-fixed-dim": "#ffb77d",
+            "tertiary": "#703a00",
+            "inverse-surface": "#213145",
+            "secondary": "#006c4a",
+            "on-secondary-fixed-variant": "#005137",
+            "on-surface": "#0b1c30",
+            "inverse-on-surface": "#eaf1ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "tertiary-fixed": "#ffdcc3",
+            "surface-container": "#e5eeff",
+            "on-background": "#0b1c30",
+            "background": "#f8f9ff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-container": "#ffd2b1",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#c7c4d8",
+            "surface": "#f8f9ff",
+            "on-primary-fixed": "#0f0069",
+            "error": "#ba1a1a",
+            "secondary-fixed-dim": "#68dba9",
+            "on-surface-variant": "#464555",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "tertiary-container": "#934e00",
+            "outline": "#777587",
+            "on-primary-container": "#dad7ff",
+            "secondary-container": "#82f5c1",
+            "on-tertiary-fixed": "#2f1500",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "secondary-fixed": "#85f8c4",
+            "primary-fixed": "#e2dfff",
+            "on-secondary-fixed": "#002114",
+            "surface-tint": "#4d44e3",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#c3c0ff",
+            "inverse-primary": "#c3c0ff",
+            "primary": "#3525cd",
+            "surface-container-high": "#dce9ff",
+            "primary-container": "#4f46e5",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#00714e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Geist"],
+            "body-md": ["Geist"],
+            "label-md": ["Geist"],
+            "display-lg": ["Geist"],
+            "body-sm": ["Geist"],
+            "body-lg": ["Geist"],
+            "headline-sm": ["Geist"],
+            "code-num": ["Geist"],
+            "label-sm": ["Geist"],
+            "headline-md": ["Geist"],
+            "title-kpi": ["Geist"],
+            "display-lg-mobile": ["Geist"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "code-num": ["13px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "title-kpi": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="fixed top-0 left-0 h-full w-[260px] p-4 flex flex-col justify-between z-40 bg-surface-container-lowest border-r border-outline-variant shadow-sm">
+<div class="flex flex-col gap-6">
+<!-- Header / Logo -->
+<div class="flex items-center gap-3 px-2 pt-1">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="restaurant" data-weight="fill" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight block">NutriTrack</span>
+<span class="text-label-sm font-label-sm text-outline block">Health Analytics</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1">
+<!-- Overview -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Overview</span>
+</a>
+<!-- Meal Logger -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="restaurant">restaurant</span>
+<span class="text-label-md font-label-md">Meal Logger</span>
+</a>
+<!-- Recipe Studio (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-low text-primary font-semibold border-l-4 border-primary shadow-sm active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-label-md font-label-md flex-1">Recipe Studio</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary-container text-on-primary px-1.5 py-0.5 rounded">AI</span>
+</a>
+<!-- 7-Day Trends -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="monitoring">monitoring</span>
+<span class="text-label-md font-label-md">7-Day Trends</span>
+</a>
+<!-- Health Profile -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+<span class="text-label-md font-label-md">Health Profile</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Footer -->
+<div class="pt-4 border-t border-outline-variant flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-tertiary-fixed text-tertiary">
+<span class="material-symbols-outlined text-[20px] text-tertiary-container" data-icon="local_fire_department" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md font-semibold">14-Day Streak</span>
+<span class="text-label-sm font-label-sm opacity-80">98% Macro Adherence</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="sticky top-0 w-full pl-[260px] border-b border-outline-variant bg-surface-container-lowest z-30 h-16 flex items-center justify-between px-8 shadow-sm">
+<!-- Left Search -->
+<div class="flex items-center gap-3 w-96">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface border border-outline-variant text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Search recipes, ingredients, or macro profiles..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="h-9 px-3.5 rounded-lg border border-outline-variant text-on-surface bg-surface-container-lowest hover:bg-surface text-label-md font-label-md transition-colors flex items-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="auto_awesome">auto_awesome</span>
+        + Generate Recipe
+      </button>
+<button class="h-9 px-4 rounded-lg bg-primary-container text-on-primary hover:bg-primary text-label-md font-label-md transition-colors flex items-center gap-1.5 shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+        + Log Meal
+      </button>
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<button class="p-2 text-outline hover:text-on-surface rounded-lg hover:bg-surface transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+</button>
+<button class="p-2 text-outline hover:text-on-surface rounded-lg hover:bg-surface transition-colors" title="Calendar">
+<span class="material-symbols-outlined text-[20px]" data-icon="calendar_today">calendar_today</span>
+</button>
+<!-- Profile Avatar -->
+<div class="flex items-center gap-2.5 pl-2">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A professional studio portrait of Prateek Verma, a sharp modern tech executive with gentle clinical focus, warm neutral lighting, minimalist clean white background, contemporary SaaS visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-h4KritSx7VTyIbnqh5Bztrh0IhzqOOa8rj_rGst1Pn5Jhw7Fj0ukgKImrntDXcZH0wHAHjy82xWFkFwmmKEAI8fdx2rrsacOX6VgHu84EBeE5FaM1dZu5_BhjrCbP6FoZXzSNvUd5qAeljbCZTG9ECHqPMka5HCFOgvXJM3fz4Tc7KjIMH8wMg5_9ym59PAJhSPWOapw5ss0iwCHBlYuP33MJgPi6qPhhfeg6NyR_0DLHoKKRMa3"/>
+<div class="hidden xl:flex flex-col text-left">
+<span class="text-label-md font-label-md font-semibold text-on-surface leading-tight">Prateek V.</span>
+<span class="text-label-sm font-label-sm text-outline">Metabolic Plan #3</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Primary Canvas Framed by Desktop Margin -->
+<main class="pl-[260px] min-h-[calc(100vh-4rem)] p-8 max-w-[1440px] mx-auto flex flex-col gap-6">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Recipe Studio &amp; Culinary AI</h1>
+<span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-primary font-semibold border border-outline-variant">v2.4 Engine</span>
+</div>
+<p class="text-body-md font-body-md text-outline mt-1">Generate custom macro-optimized recipes from pantry ingredients or dietary goals with predictive biometric matching.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="h-10 px-4 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface text-label-md font-label-md transition-colors flex items-center gap-2 active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="bookmark">bookmark</span>
+          Saved Cookbooks (14)
+        </button>
+<button class="h-10 px-4 rounded-lg bg-primary-container text-on-primary hover:bg-primary text-label-md font-label-md transition-colors flex items-center gap-2 active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+          + Create Custom Recipe
+        </button>
+</div>
+</div>
+<!-- Main Filter Panel: Macro & Ingredient Composer -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm flex flex-col gap-6">
+<div class="flex items-center justify-between border-b border-outline-variant pb-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Macro &amp; Ingredient Composer</h2>
+<span class="text-body-sm font-body-sm text-outline ml-2">Targeting current metabolic window (+480 kcal deficit)</span>
+</div>
+<button class="text-label-md font-label-md text-primary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="restart_alt">restart_alt</span>
+          Reset Filters
+        </button>
+</div>
+<!-- Filters Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left: Dietary Preferences & Time (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-5 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-outline-variant pb-6 lg:pb-0">
+<!-- Dietary Preference Pills -->
+<div>
+<label class="text-label-sm font-label-sm text-outline uppercase tracking-wider block mb-2 font-semibold">Dietary Protocol Preference</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-low text-primary border border-primary font-semibold transition-all">High Protein</button>
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">Ketogenic</button>
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface-container-low text-primary border border-primary font-semibold transition-all">Mediterranean</button>
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">Low FODMAP</button>
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">Plant-Forward</button>
+<button class="px-3 py-1.5 rounded-full text-label-md font-label-md bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">Gluten-Free</button>
+</div>
+</div>
+<!-- Prep Time Selector -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-sm font-label-sm text-outline uppercase tracking-wider font-semibold">Preparation Time Limit</label>
+<span class="text-label-sm font-label-sm text-primary font-semibold">&lt; 25 mins active</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2 px-3 rounded-lg border border-outline-variant bg-surface text-center hover:bg-surface-container-low transition-all">
+<span class="text-label-md font-label-md text-on-surface block font-medium">&lt; 15 mins</span>
+<span class="text-[10px] text-outline">Ultra-Fast</span>
+</button>
+<button class="py-2 px-3 rounded-lg border-2 border-primary bg-surface-container-low text-center shadow-sm">
+<span class="text-label-md font-label-md text-primary block font-semibold">15-30 mins</span>
+<span class="text-[10px] text-primary">Balanced</span>
+</button>
+<button class="py-2 px-3 rounded-lg border border-outline-variant bg-surface text-center hover:bg-surface-container-low transition-all">
+<span class="text-label-md font-label-md text-on-surface block font-medium">30-45 mins</span>
+<span class="text-[10px] text-outline">Gourmet Prep</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Middle: Target Macro Dials (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-4 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-outline-variant pb-6 lg:pb-0">
+<label class="text-label-sm font-label-sm text-outline uppercase tracking-wider block font-semibold">Target Macro Envelope (Per Serving)</label>
+<!-- Calories Dial -->
+<div class="p-3 rounded-lg bg-surface border border-outline-variant flex items-center justify-between">
+<div>
+<span class="text-label-sm font-label-sm text-outline block">Energy Target</span>
+<span class="text-headline-sm font-headline-sm text-on-surface font-bold">~500 <span class="text-body-sm font-normal text-outline">kcal</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded text-label-sm font-code-num bg-surface-container text-primary font-semibold">± 5% precision</span>
+</div>
+</div>
+<!-- Protein & Carbs Split Row -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 rounded-lg bg-surface border border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline block">Min Protein</span>
+<span class="text-headline-sm font-headline-sm text-on-surface font-bold">35g+</span>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 75%;"></div>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-surface border border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline block">Max Carbs</span>
+<span class="text-headline-sm font-headline-sm text-on-surface font-bold">40g</span>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 50%;"></div>
+</div>
+</div>
+</div>
+<div class="text-[11px] text-outline flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary" data-icon="check_circle">check_circle</span>
+            Guaranteed minimum 30% thermal effect of feeding (TEF).
+          </div>
+</div>
+<!-- Right: Pantry Ingredients & AI CTA (3 cols) -->
+<div class="lg:col-span-3 flex flex-col justify-between gap-4">
+<div>
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-sm font-label-sm text-outline uppercase tracking-wider font-semibold">Active Pantry Items</label>
+<span class="text-[11px] text-primary font-code-num">7 Loaded</span>
+</div>
+<div class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Eggs <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Oats <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Greek Yogurt <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Spinach <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Blueberries <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Chicken Breast <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm bg-surface-container text-on-surface border border-outline-variant">
+                Sweet Potato <span class="material-symbols-outlined text-[14px] cursor-pointer text-outline hover:text-error" data-icon="close">close</span>
+</span>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-label-sm font-label-sm border border-dashed border-outline text-outline hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+                + Add ingredient
+              </button>
+</div>
+</div>
+<!-- Prominent Action CTA -->
+<button class="w-full py-3 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-body-md flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome">auto_awesome</span>
+            ✨ Generate AI Recipes
+          </button>
+</div>
+</div>
+</section>
+<!-- Main Recipe Showcase Grid (3 Cards Across) -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Algorithmic Culinary Recommendations</h2>
+<p class="text-body-sm font-body-sm text-outline">Custom formulated to satisfy remaining daily micronutrient distribution.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-outline">Sort by:</span>
+<button class="px-3 py-1 rounded-md border border-outline-variant bg-surface-container-lowest text-label-md font-label-md text-on-surface flex items-center gap-1">
+            Highest Macro Fit <span class="material-symbols-outlined text-[16px]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1: Crispy Lemon Herb Air-Fried Salmon -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:border-outline transition-all flex flex-col justify-between">
+<div>
+<!-- Card Image -->
+<div class="relative h-48 w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clinical, appetizing overhead photograph of crispy lemon herb air-fried salmon fillet served with fresh asparagus spears and microgreens on a matte ceramic plate. Crisp bright studio light, immaculate culinary presentation, high contrast modern light aesthetic with fresh natural herb garnishes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg8mSc90ClPXIF9074I8XEHEofdcHV3npLH9Sydio7gHYfoSRWophGUD0jsx92di41wZXJL6kcNMVjcKrFWe_fsXrOtiMA5OGsRLA_obUyBAV4s0hUScqWyUKqMKRlON9JWbMC5HrGPSLuPo-Xv2-iHtDIjUJSDWgAc6gzipHdU0ERELovYre6i2-FZxmKjdiC4wuxmGVqaO3HffQ0fUA1DCdire8K4cvApKxvqvGaSx4fxk4ZusNh"/>
+<div class="absolute top-3 left-3">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-lowest/90 backdrop-blur-sm text-secondary font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  High Protein / Omega-3
+                </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 rounded-md text-label-sm font-code-num bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="schedule">schedule</span>
+                  20 mins
+                </span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-5 flex flex-col gap-4">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold leading-snug">Crispy Lemon Herb Air-Fried Salmon</h3>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Infused with cold-pressed olive oil, cracked dill, and sea salt crust.</p>
+</div>
+<!-- Macro KPI Row -->
+<div class="grid grid-cols-4 gap-1 p-2.5 bg-surface rounded-lg border border-outline-variant text-center">
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Calories</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">510</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Protein</span>
+<span class="text-label-md font-code-num font-bold text-primary">46g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Carbs</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">18g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Fats</span>
+<span class="text-label-md font-code-num font-bold text-tertiary">24g</span>
+</div>
+</div>
+<!-- Segmented Macro Bar -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full" style="width: 48%;" title="Protein 46g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-secondary-container h-full" style="width: 18%;" title="Carbs 18g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-tertiary h-full" style="width: 34%;" title="Fats 24g"></div>
+</div>
+<!-- Ingredient Checklist Preview -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="text-label-sm font-label-sm text-outline font-semibold uppercase tracking-wider">Required Components</span>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Wild Atlantic Salmon (200g)</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Baby Spinach + Fresh Lemon</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 flex items-center gap-2">
+<button class="flex-1 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-label-md font-label-md font-semibold border border-outline-variant transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+              View Full Recipe
+            </button>
+<button class="flex-1 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="bookmark_add">bookmark_add</span>
+              Log to Dinner
+            </button>
+</div>
+</article>
+<!-- Card 2: High-Protein Whipped Cottage Cheese & Berry Parfait -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:border-outline transition-all flex flex-col justify-between">
+<div>
+<!-- Card Image -->
+<div class="relative h-48 w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean top-down food studio shot of a layered glass parfait containing creamy whipped white cottage cheese, pureed blueberry compote, organic rolled oats, and sliced chia seeds. Pure bright daylight lighting, clinical Scandinavian interior aesthetic, pristine white surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2GA7g3IQ2wtxirJfAKOLxZu-Yn5avwxHXgy9W8UbKZ0kgwLy4KF51OxsG43brx7UmwowKD5q_VV2wyBM796I646gTwkEDedw_LV42UjqKcxSlhTovEOxAp-BPX1H5tAj4V-SGNaffasjso-tn7osF_MfBDWg-pEsyT0FAYY0QrjefhwtjX-34WloREj2Hwbd3KHsDKXkcVuq-yp7Sf6eUG7RyNZQ6BMT8jBvrLjVYpOVETZN4t8cX"/>
+<div class="absolute top-3 left-3">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Quick Breakfast
+                </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 rounded-md text-label-sm font-code-num bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="schedule">schedule</span>
+                  8 mins
+                </span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-5 flex flex-col gap-4">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold leading-snug">Whipped Cottage Cheese &amp; Berry Parfait</h3>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Aerated 2% low-fat curd blended with vanilla whey and wild blueberries.</p>
+</div>
+<!-- Macro KPI Row -->
+<div class="grid grid-cols-4 gap-1 p-2.5 bg-surface rounded-lg border border-outline-variant text-center">
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Calories</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">380</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Protein</span>
+<span class="text-label-md font-code-num font-bold text-primary">34g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Carbs</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">36g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Fats</span>
+<span class="text-label-md font-code-num font-bold text-tertiary">8g</span>
+</div>
+</div>
+<!-- Segmented Macro Bar -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full" style="width: 44%;" title="Protein 34g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-secondary-container h-full" style="width: 42%;" title="Carbs 36g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-tertiary h-full" style="width: 14%;" title="Fats 8g"></div>
+</div>
+<!-- Ingredient Checklist Preview -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="text-label-sm font-label-sm text-outline font-semibold uppercase tracking-wider">Required Components</span>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Greek Yogurt / Cottage Curd</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Wild Blueberries + Rolled Oats</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 flex items-center gap-2">
+<button class="flex-1 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-label-md font-label-md font-semibold border border-outline-variant transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+              View Full Recipe
+            </button>
+<button class="flex-1 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="bookmark_add">bookmark_add</span>
+              Log to Breakfast
+            </button>
+</div>
+</article>
+<!-- Card 3: Quinoa Mediterranean Power Bowl -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:border-outline transition-all flex flex-col justify-between">
+<div>
+<!-- Card Image -->
+<div class="relative h-48 w-full bg-surface overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A vibrant professional flat-lay photograph of a Mediterranean power bowl filled with roasted chicken breast strips, fluffy quinoa, kalamata olives, cucumber cubes, diced sweet potato, and baby spinach leaves. High visual clarity, clean light laboratory lighting, fresh healthy gastronomy style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaqQtbDtLx_PpNWc2zP2z-Xe6sxXj2er_aCWeMMtY7PYj0cKNE22eYBpLsZbfThJTKY7wSTcQaP42hewP9zFUPQdT1epZbg_V9sJ2NaBRBcHsWS79CwUGstfYCk3RLp-eFsoWRStzXgwZ8ZlPf5KSUKJVaAs5LvJyzKo-WSNBMP20zX85LnP4xYSmo0jykV9N986shP5YRvn54Wi6ZD7I13428fIY4j-d5AhAIkA_spGbg7R4Uy6ag"/>
+<div class="absolute top-3 left-3">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container-lowest/90 backdrop-blur-sm text-tertiary font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Meal Prep Friendly
+                </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 rounded-md text-label-sm font-code-num bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-semibold border border-outline-variant flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="schedule">schedule</span>
+                  25 mins
+                </span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-5 flex flex-col gap-4">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold leading-snug">Quinoa Mediterranean Power Bowl</h3>
+<p class="text-body-sm font-body-sm text-outline mt-0.5">Slow-carbed energy release with tender diced chicken and roasted yams.</p>
+</div>
+<!-- Macro KPI Row -->
+<div class="grid grid-cols-4 gap-1 p-2.5 bg-surface rounded-lg border border-outline-variant text-center">
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Calories</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">540</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Protein</span>
+<span class="text-label-md font-code-num font-bold text-primary">38g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Carbs</span>
+<span class="text-label-md font-code-num font-bold text-on-surface">58g</span>
+</div>
+<div>
+<span class="text-[10px] text-outline uppercase tracking-wider block">Fats</span>
+<span class="text-label-md font-code-num font-bold text-tertiary">16g</span>
+</div>
+</div>
+<!-- Segmented Macro Bar -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full" style="width: 38%;" title="Protein 38g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-secondary-container h-full" style="width: 44%;" title="Carbs 58g"></div>
+<div class="w-0.5 bg-surface-container-lowest"></div>
+<div class="bg-tertiary h-full" style="width: 18%;" title="Fats 16g"></div>
+</div>
+<!-- Ingredient Checklist Preview -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="text-label-sm font-label-sm text-outline font-semibold uppercase tracking-wider">Required Components</span>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Chicken Breast (180g)</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle">check_circle</span>
+<span>Sweet Potato + Fresh Spinach</span>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-1.5 py-0.2 rounded ml-auto">In Pantry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 flex items-center gap-2">
+<button class="flex-1 py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-label-md font-label-md font-semibold border border-outline-variant transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+              View Full Recipe
+            </button>
+<button class="flex-1 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="bookmark_add">bookmark_add</span>
+              Log to Lunch
+            </button>
+</div>
+</article>
+</div>
+</section>
+<!-- AI Nutritionist Chef's Notes (Bento Analytical Card) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shrink-0 border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-[26px]" data-icon="psychology" data-weight="fill" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">AI Nutritionist Chef's Notes</h3>
+<span class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container text-secondary font-semibold border border-outline-variant">Real-time Biometric Match</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">
+            "Swap olive oil for spray in the Salmon skillet to save <strong class="text-on-surface font-semibold">12g fat (108 kcal)</strong>, keeping your dinner perfectly locked at exactly 400 kcal without sacrificing crisp skin."
+          </p>
+<div class="flex flex-wrap items-center gap-3 mt-3 text-label-sm font-label-sm text-outline">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary" data-icon="check_circle">check_circle</span>
+              Remaining Today: 520 kcal | 42g Protein | 45g Carbs
+            </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="text-primary hover:underline cursor-pointer">Auto-apply swap to Meal Logger →</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-end md:self-center">
+<button class="px-3.5 py-2 rounded-lg border border-outline-variant bg-surface text-on-surface hover:bg-surface-container-low text-label-md font-label-md transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="thumb_up">thumb_up</span>
+          Helpful
+        </button>
+<button class="px-3.5 py-2 rounded-lg border border-outline-variant bg-surface text-outline hover:text-on-surface hover:bg-surface-container-low text-label-md font-label-md transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="refresh">refresh</span>
+          New Suggestion
+        </button>
+</div>
+</section>
+</main>
+</body></html>

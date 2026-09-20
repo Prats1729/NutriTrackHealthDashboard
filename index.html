@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriTrack - Health Analytics Design Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+            },
+            emerald: {
+              500: '#059669',
+              600: '#047857',
+            },
+            surface: {
+              base: '#f8fafc',
+              panel: '#f1f5f9',
+              card: '#ffffff',
+            }
+          },
+          fontFamily: {
+            sans: ['Geist', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Geist', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .screen-active {
+      background-color: #eef2ff;
+      border-color: #4f46e5;
+      color: #4f46e5;
+    }
+    .preview-frame {
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+  <!-- Top Application Banner -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+          <span class="material-symbols-outlined text-xl">eco</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-bold text-slate-900 tracking-tight leading-none">NutriTrack</h1>
+            <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">Stitch Import</span>
+          </div>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Nutritional Intelligence Design System &amp; Workspace</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- View Toggle Buttons -->
+        <div class="hidden md:flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-medium text-slate-600">
+          <button onclick="setViewMode('preview')" id="btn-view-preview" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition">Live Interactive Viewer</button>
+          <button onclick="setViewMode('gallery')" id="btn-view-gallery" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition">Screens Gallery</button>
+        </div>
+
+        <a id="btn-open-fullscreen" href="screens/01-dashboard.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-all">
+          <span>Open Fullscreen</span>
+          <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Viewer Bar -->
+  <section id="viewer-nav-section" class="bg-slate-50 border-b border-slate-200 px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Screen Tabs -->
+      <nav class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0" id="screen-tabs">
+        <button onclick="loadScreen('screens/01-dashboard.html', this, 'Overview')" class="screen-tab screen-active flex items-center gap-2 px-3 py-1.5 rounded-lg border border-indigo-600 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">dashboard</span>
+          <span>1. Overview</span>
+        </button>
+        <button onclick="loadScreen('screens/02-meal-logger.html', this, 'Meal Logger')" class="screen-tab flex items-center gap-2 px-3 py-1.5 rounded-lg border border-transparent hover:bg-slate-200/70 text-slate-700 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">restaurant</span>
+          <span>2. Meal Logger</span>
+        </button>
+        <button onclick="loadScreen('screens/03-trends.html', this, '7-Day Trends')" class="screen-tab flex items-center gap-2 px-3 py-1.5 rounded-lg border border-transparent hover:bg-slate-200/70 text-slate-700 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">monitoring</span>
+          <span>3. 7-Day Trends</span>
+        </button>
+        <button onclick="loadScreen('screens/04-recipe-studio.html', this, 'Recipe Studio')" class="screen-tab flex items-center gap-2 px-3 py-1.5 rounded-lg border border-transparent hover:bg-slate-200/70 text-slate-700 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">menu_book</span>
+          <span>4. Recipe Studio</span>
+        </button>
+        <button onclick="loadScreen('screens/05-health-profile.html', this, 'Health Profile')" class="screen-tab flex items-center gap-2 px-3 py-1.5 rounded-lg border border-transparent hover:bg-slate-200/70 text-slate-700 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">person</span>
+          <span>5. Health Profile</span>
+        </button>
+        <button onclick="loadScreen('screens/06-settings.html', this, 'Settings')" class="screen-tab flex items-center gap-2 px-3 py-1.5 rounded-lg border border-transparent hover:bg-slate-200/70 text-slate-700 text-xs font-medium transition whitespace-nowrap">
+          <span class="material-symbols-outlined text-base">settings</span>
+          <span>6. Settings</span>
+        </button>
+      </nav>
+
+      <!-- Viewport Controls -->
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium text-slate-500 hidden sm:inline">Viewport:</span>
+        <div class="inline-flex bg-slate-200/70 p-0.5 rounded-lg border border-slate-300/60 text-xs font-medium text-slate-600">
+          <button onclick="setViewport('100%', this)" class="vp-btn px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm" title="Full Width (100%)">Fluid</button>
+          <button onclick="setViewport('1440px', this)" class="vp-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900" title="Desktop 1440px">1440px</button>
+          <button onclick="setViewport('1024px', this)" class="vp-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900" title="Tablet 1024px">Tablet</button>
+          <button onclick="setViewport('414px', this)" class="vp-btn px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900" title="Mobile 414px">Mobile</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Interactive Previewer Container -->
+  <main id="preview-section" class="flex-1 bg-slate-100/60 p-4 sm:p-6 flex flex-col items-center">
+    <div id="frame-wrapper" class="w-full flex justify-center">
+      <div id="frame-container" class="preview-frame w-full h-[85vh] bg-white rounded-xl border border-slate-300 overflow-hidden shadow-sm">
+        <iframe id="screen-iframe" src="screens/01-dashboard.html" class="w-full h-full border-none"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <!-- Screen Gallery Section (Toggleable) -->
+  <section id="gallery-section" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900">All Screens &amp; Design Artifacts</h2>
+        <p class="text-sm text-slate-600 mt-1">High-fidelity screens crafted with the Nutritional Intelligence system.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="design-system.md" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-lg flex items-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-sm">palette</span>
+          <span>View design-system.md</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Screen 1 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/01-dashboard.png" alt="Health Analytics & Nutrition Dashboard" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/01-dashboard.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/01-dashboard.html', null, 'Overview'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 01</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">Health Analytics &amp; Dashboard</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">Daily calorie budget, macro breakdown ring, meal breakdown cards, and biometric trends.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">01-dashboard.html</span>
+            <a href="screens/01-dashboard.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 2 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/02-meal-logger.png" alt="Meal Logger" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/02-meal-logger.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/02-meal-logger.html', null, 'Meal Logger'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 02</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">Meal Logger</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">Multi-nutrient logging stream, barcode scanning mockups, portion controls, and micronutrient calculations.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">02-meal-logger.html</span>
+            <a href="screens/02-meal-logger.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 3 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/03-trends.png" alt="7-Day Trends" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/03-trends.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/03-trends.html', null, '7-Day Trends'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 03</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">7-Day Trends</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">Weekly caloric adherence, macronutrient balance over time, body weight correlation, and analytical insights.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">03-trends.html</span>
+            <a href="screens/03-trends.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 4 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/04-recipe-studio.png" alt="Recipe Studio" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/04-recipe-studio.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/04-recipe-studio.html', null, 'Recipe Studio'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 04</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">Recipe Studio</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">AI recipe generator, macro-targeted culinary builder, ingredient substitution engine, and meal prep optimizer.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">04-recipe-studio.html</span>
+            <a href="screens/04-recipe-studio.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 5 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/05-health-profile.png" alt="Health Profile" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/05-health-profile.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/05-health-profile.html', null, 'Health Profile'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 05</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">Health Profile</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">BMR &amp; TDEE calculators, goal presets (Lean Bulk, Cutting, Maintenance), dietary restrictions, and biometric targets.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">05-health-profile.html</span>
+            <a href="screens/05-health-profile.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 6 -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition group">
+        <div class="aspect-[16/10] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+          <img src="screenshots/06-settings.png" alt="Settings" class="w-full h-full object-cover object-top group-hover:scale-102 transition duration-300">
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+            <a href="screens/06-settings.html" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-white text-slate-900 rounded-lg shadow">Launch Page</a>
+            <button onclick="loadScreen('screens/06-settings.html', null, 'Settings'); setViewMode('preview');" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 text-white rounded-lg shadow">Preview in Hub</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-600">Screen 06</span>
+          <h3 class="text-base font-bold text-slate-900 mt-1">Settings</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">Wearable sensor integrations, notifications &amp; meal reminders, unit preferences, data exports, and privacy toggles.</p>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-mono">06-settings.html</span>
+            <a href="screens/06-settings.html" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">Open <span>&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>NutriTrack Health Dashboard &bull; Imported from Google Stitch Project <span class="font-mono text-slate-700">8964717628383086438</span></p>
+      <div class="flex items-center gap-4">
+        <a href="design-system.md" class="hover:text-indigo-600 underline">Design System</a>
+        <a href="project-metadata.json" class="hover:text-indigo-600 underline">Project Metadata</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const iframe = document.getElementById('screen-iframe');
+    const container = document.getElementById('frame-container');
+    const fullscreenBtn = document.getElementById('btn-open-fullscreen');
+    const tabs = document.querySelectorAll('.screen-tab');
+    const vpBtns = document.querySelectorAll('.vp-btn');
+
+    function loadScreen(url, tabElement, name) {
+      iframe.src = url;
+      fullscreenBtn.href = url;
+      
+      tabs.forEach(t => {
+        t.classList.remove('screen-active', 'border-indigo-600', 'text-indigo-600', 'bg-indigo-50');
+        t.classList.add('border-transparent', 'text-slate-700');
+      });
+
+      if (tabElement) {
+        tabElement.classList.add('screen-active', 'border-indigo-600', 'text-indigo-600', 'bg-indigo-50');
+        tabElement.classList.remove('border-transparent', 'text-slate-700');
+      } else {
+        tabs.forEach(t => {
+          if (t.innerText.includes(name)) {
+            t.classList.add('screen-active', 'border-indigo-600', 'text-indigo-600', 'bg-indigo-50');
+            t.classList.remove('border-transparent', 'text-slate-700');
+          }
+        });
+      }
+    }
+
+    function setViewport(width, btn) {
+      container.style.width = width;
+      vpBtns.forEach(b => {
+        b.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+        b.classList.add('text-slate-600');
+      });
+      btn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+      btn.classList.remove('text-slate-600');
+    }
+
+    function setViewMode(mode) {
+      const previewSec = document.getElementById('preview-section');
+      const gallerySec = document.getElementById('gallery-section');
+      const navSec = document.getElementById('viewer-nav-section');
+      const btnPreview = document.getElementById('btn-view-preview');
+      const btnGallery = document.getElementById('btn-view-gallery');
+
+      if (mode === 'preview') {
+        previewSec.classList.remove('hidden');
+        navSec.classList.remove('hidden');
+        gallerySec.classList.add('hidden');
+        btnPreview.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+        btnPreview.classList.remove('text-slate-600');
+        btnGallery.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+        btnGallery.classList.add('text-slate-600');
+      } else {
+        previewSec.classList.add('hidden');
+        navSec.classList.add('hidden');
+        gallerySec.classList.remove('hidden');
+        btnGallery.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+        btnGallery.classList.remove('text-slate-600');
+        btnPreview.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+        btnPreview.classList.add('text-slate-600');
+      }
+    }
+  </script>
+</body>
+</html>
