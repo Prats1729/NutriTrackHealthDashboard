@@ -58,11 +58,13 @@ app.get('/api/health', (req, res) => {
 import profileRoutes from "./routes/profileRoutes.js"
 import foodRoutes from "./routes/foodRoutes.js"
 import logRoutes from "./routes/logRoutes.js"
+import analyticsRoutes from "./routes/analyticsRoutes.js"
 
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/foods", foodRoutes);
 app.use("/api/logs", logRoutes);
+app.use("/api/analytics", analyticsRoutes);
 // 404 Catch-All Handler
 app.use((req, res) => {
   res.status(404).json({
