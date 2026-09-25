@@ -71,6 +71,35 @@ export const logMeal = async (req, res) => {
         // Save the log
         await log.save();
 
+        // --- STREAK CONTINUITY LOGIC ---
+        // Calculate what "yesterday" would be relative to the logged date
+        const logDateObj = new Date(date);
+        logDateObj.setDate(logDateObj.getDate() - 1);
+        const dateYesterday = logDateObj.toISOString().split('T')[0];
+
+        let profileUpdated = false;
+        
+        if (user.lastLoggedDate !== date) {
+            if (user.lastLoggedDate === dateYesterday) {
+                user.currentStreak += 1;
+            } else if (date > (user.lastLoggedDate || '1970-01-01')) {
+                // If they missed a day, reset to 1. 
+                // Note: We only update if the logged date is newer than the last logged date
+                // to prevent older back-logged meals from destroying a current active streak.
+                user.currentStreak = 1;
+            }
+            
+            // Only update lastLoggedDate if the date being logged is newer or equal
+            if (!user.lastLoggedDate || date >= user.lastLoggedDate) {
+                user.lastLoggedDate = date;
+                profileUpdated = true;
+            }
+        }
+
+        if (profileUpdated || user.isModified('currentStreak')) {
+            await user.save();
+        }
+
         res.status(201).json({ status: 'success', data: log });
     } catch (error) {
         res.status(500).json({ status: 'error', message: error.message });
