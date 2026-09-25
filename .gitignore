@@ -32,3 +32,4 @@ dist-ssr
 .env.production.local
 
 AGENTS.md
+firebaseconfig.txtserver/serviceAccountKey.json
