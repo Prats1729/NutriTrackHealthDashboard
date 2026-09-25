@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import authRoutes from "./routes/authRoutes.js"
 import { connectDB, getDatabaseStatus } from './config/db.js';
 
 // Load environment variables from .env
@@ -54,6 +55,14 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+import profileRoutes from "./routes/profileRoutes.js"
+import foodRoutes from "./routes/foodRoutes.js"
+import logRoutes from "./routes/logRoutes.js"
+
+app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/foods", foodRoutes);
+app.use("/api/logs", logRoutes);
 // 404 Catch-All Handler
 app.use((req, res) => {
   res.status(404).json({
@@ -64,10 +73,16 @@ app.use((req, res) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('Unhandled Server Error:', err);
+  console.error("Unhandled Server Error:", err);
+
+  // Do not leak raw error messages in production
+  const message =
+    process.env.NODE_ENV === "production"
+      ? "Internal Server Error"
+      : err.message || "Internal Server Error";
   res.status(err.status || 500).json({
-    status: 'error',
-    message: err.message || 'Internal Server Error'
+    status: "error",
+    message: message,
   });
 });
 
